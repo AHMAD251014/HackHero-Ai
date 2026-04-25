@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { 
+  Menu,
   Terminal, 
   Sparkles, 
   Cpu, 
@@ -172,11 +173,11 @@ export default function App() {
 
       {/* Sidebar - Agents & Meta */}
       <aside className={`
-        fixed inset-y-0 left-0 w-80 border-r border-zinc-800 bg-[#0c0c0c] flex flex-col z-50 
+        fixed inset-y-0 left-0 w-[85%] sm:w-80 border-r border-zinc-800 bg-[#0c0c0c] flex flex-col z-50 
         transition-transform duration-300 lg:relative lg:translate-x-0
-        ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        ${isSidebarOpen ? 'translate-x-0 shadow-[20px_0_40px_rgba(0,0,0,0.5)]' : '-translate-x-full'}
       `}>
-        <div className="p-8 border-b border-zinc-800 bg-gradient-to-b from-indigo-500/5 to-transparent flex justify-between items-center">
+        <div className="p-6 lg:p-8 border-b border-zinc-800 bg-gradient-to-b from-indigo-500/5 to-transparent flex justify-between items-center">
           <div>
             <div className="flex items-center gap-3 mb-2">
               <div className="w-8 h-8 bg-gradient-to-tr from-indigo-500 to-emerald-400 rounded-sm shadow-[0_0_15px_rgba(99,102,241,0.3)]"></div>
@@ -212,7 +213,7 @@ export default function App() {
                   <div className="flex items-center gap-3">
                     <img src={agent.avatar} className="w-10 h-10 rounded bg-zinc-800 border border-zinc-700" alt={agent.name} />
                     <div>
-                      <div className="text-xs font-bold leading-none mb-1">{agent.name}</div>
+                      <div className="text-xs font-bold leading-none mb-1 truncate max-w-[180px]">{agent.name}</div>
                       <div className="text-[10px] font-mono text-zinc-500 uppercase">{agent.role}</div>
                     </div>
                   </div>
@@ -222,7 +223,7 @@ export default function App() {
           </div>
 
           <div className="px-4">
-            <div className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-5">
+            <div className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4 lg:p-5">
               <h2 className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-4">Neural Stats</h2>
               <div className="space-y-4">
                 {[
@@ -259,14 +260,14 @@ export default function App() {
       <main className="flex-1 flex flex-col relative z-10 bg-[#0a0a0a] min-w-0">
         {/* Navigation Tabs */}
         <nav className="h-16 border-b border-zinc-800 flex items-center justify-between px-4 lg:px-10 bg-[#0b0b0b] sticky top-0 z-30">
-          <div className="flex items-center gap-4 lg:gap-10 overflow-x-auto no-scrollbar mask-fade-right flex-1 scroll-smooth">
+          <div className="flex items-center gap-2 lg:gap-10 overflow-x-auto no-scrollbar mask-fade-right flex-1 scroll-smooth">
             <button 
               onClick={() => setIsSidebarOpen(true)}
               className="lg:hidden p-2 text-zinc-400 hover:text-white flex-shrink-0"
             >
-              <Bot size={20} />
+              <Menu size={20} />
             </button>
-            <div className="flex gap-6 lg:gap-10">
+            <div className="flex gap-4 lg:gap-10 pr-4">
               {[
                 { id: 'chat', label: 'RESEARCH', icon: Bot },
                 { id: 'forge', label: 'IDEA FORGE', icon: Sparkles },
@@ -531,7 +532,7 @@ export default function App() {
                    </div>
 
                    <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-12 pb-20">
-                      <div className="lg:col-span-4 space-y-8 order-2 lg:order-1">
+                      <div className="lg:col-span-4 space-y-8 order-1 lg:order-1">
                          <div className="bg-zinc-900 border border-zinc-800 p-6 lg:p-8 rounded-xl space-y-6">
                             {[
                               { l: "PROJECT_ID", v: project.name, k: 'name' },
@@ -551,7 +552,7 @@ export default function App() {
                          </div>
                       </div>
 
-                      <div className="lg:col-span-8 order-1 lg:order-2">
+                      <div className="lg:col-span-8 order-2 lg:order-2">
                          <div className="bg-black border-2 border-dashed border-zinc-800 p-6 lg:p-12 rounded-2xl min-h-[400px] lg:min-h-[600px] relative">
                             {generatedPitchText ? (
                               <div className="space-y-6">
